@@ -61,7 +61,7 @@ async function indexChapters() {
   
     const titleRaw = await titleFile.text();
   
-    title = titleRaw.trim();
+    const title = titleRaw.trim();
     
     return {
       number: parseInt(folder.name),
