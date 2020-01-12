@@ -103,9 +103,6 @@ exports.handler = async (event) =>{
     await indexChapters();
     return {
       statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin" : "*",
-      },
       body: 'index.json updated'
     }
   } catch (e) {
