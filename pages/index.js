@@ -23,7 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch('http://kind-sinoussi-a45d2a.netlify.com/.netlify/functions/shifters-content');
+      const res = await fetch('https://kind-sinoussi-a45d2a.netlify.com/.netlify/functions/shifters-content');
       const newChaptersList = await res.json();
       setChapters(newChaptersList);
     })();
