@@ -1,4 +1,16 @@
 import { useState } from 'react';
+import Link from 'next/link';
+import styled from 'styled-components';
+
+const StyledAdmin = styled.div`
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+
+  button {
+    font-size: 20px;
+    cursor: pointer;
+  }
+`
 
 const AdminPage = () => {
 
@@ -23,7 +35,7 @@ const AdminPage = () => {
   };
 
   return (
-    <div>
+    <StyledAdmin>
       {isPublishing && <h4>Publishing in progress...</h4>}
       
       {isErrorPublishing 
@@ -32,7 +44,9 @@ const AdminPage = () => {
       {didPublish && !isErrorPublishing && <h4>Last publish was successful.</h4>}
 
       {!isPublishing && !isErrorPublishing && <button onClick={publishChapters}>Publish Shifters Chapters</button>}
-    </div>
+
+      <h4><Link href="/"><a>Return to main site.</a></Link></h4>
+    </StyledAdmin>
   );
 };
 
