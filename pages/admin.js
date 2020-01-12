@@ -24,7 +24,7 @@ const AdminPage = () => {
     setIsPublishing(true);
     setDidPublish(false);
     try {
-      await fetch('https://kind-sinoussi-a45d2a.netlify.com/.netlify/functions/create-shifters-index', {
+      await fetch('/.netlify/functions/create-shifters-index', {
         method: 'POST',
       });
       setDidPublish(true);
