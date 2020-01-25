@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = require('isomorphic-unfetch')
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'GET') {

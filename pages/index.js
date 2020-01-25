@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// import Head from 'next/head'
-// import Nav from '../components/nav'
+import fetch from 'isomorphic-unfetch';
+import { ROOT_URL } from './../constants';
 
 const ChapterDisplay = styled.section`
   display: flex;
@@ -17,23 +17,15 @@ const ChapterDisplay = styled.section`
   }
 `
 
-const Home = () => {
+const Home = props => {
 
-  const [chapters, setChapters] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch('/.netlify/functions/shifters-content');
-      const newChaptersList = await res.json();
-      setChapters(newChaptersList);
-    })();
-  }, []);
+  const { chapters = [] } = props;
 
   return (
     <div>
       {chapters.map(({number, title, pages}) => {
         return (
-          <ChapterDisplay key={number} className="chapter">
+          <ChapterDisplay key={number}>
             <h1>Chapter {number}: {title}</h1>
             {pages.map(pageId => <img key={pageId} src={`https://drive.google.com/uc?id=${pageId}`}/>)}
           </ChapterDisplay>
@@ -42,5 +34,19 @@ const Home = () => {
     </div>
   );
 }
+
+Home.getInitialProps = async () => {
+  const res = await fetch(`${ROOT_URL}/.netlify/functions/shifters-content`);
+  const chapters = await res.json();
+
+  return {
+    chapters,
+  };
+
+};
+
+Home.propTypes = {
+  chapters: PropTypes.array,
+};
 
 export default Home

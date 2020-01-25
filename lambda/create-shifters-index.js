@@ -1,5 +1,5 @@
 const {google} = require('googleapis');
-const fetch = require('node-fetch');
+const fetch = require('isomorphic-unfetch');
 
 // export CHAPTERS_FOLDER_ID='1W6gVK5xU2VTsXDozyskHojMM2nKEM3Sg';
 // export INDEX_JSON_FILE_ID='1pQUOmyHJDQWhVEzPt9Etg6MOJpfX1lul';
