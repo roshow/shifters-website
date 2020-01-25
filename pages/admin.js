@@ -23,12 +23,11 @@ const AdminPage = () => {
   const publishChapters = async () => {
     setIsPublishing(true);
     setDidPublish(false);
-    try {
-      await fetch('/.netlify/functions/create-shifters-index', {
-        method: 'POST',
-      });
-      setDidPublish(true);
-    } catch(e) {
+    const { status } = await fetch('/api/create-index', {
+      method: 'POST',
+    });
+    setDidPublish(true);
+    if (status !== 200) {
       setIsErrorPublishing(true);
     }
     setIsPublishing(false);

@@ -1,5 +1,6 @@
-const {google} = require('googleapis');
-const fetch = require('isomorphic-unfetch');
+import { google } from 'googleapis';
+import fetch from 'isomorphic-unfetch';
+import Cors from 'micro-cors'
 
 // export CHAPTERS_FOLDER_ID='1W6gVK5xU2VTsXDozyskHojMM2nKEM3Sg';
 // export INDEX_JSON_FILE_ID='1pQUOmyHJDQWhVEzPt9Etg6MOJpfX1lul';
@@ -95,22 +96,19 @@ async function indexChapters() {
 
 }
 
-exports.handler = async (event) =>{
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
+const handler = async (req, res) =>{
   try {
     await indexChapters();
-    return {
-      statusCode: 200,
-      body: 'index.json updated'
-    }
+    res.status(200).send('index.json updated');
   } catch (e) {
     console.log('Error with indexChapters:', e);
-    return {
-      statusCode: 500,
-      body: 'Something did not go right on our end I think'
-    }
+    res.status(500).send('Something did not go right on our end I think');
   }
   
 };
+
+const cors = Cors({
+  allowMethods: ['POST'],
+});
+
+export default cors(handler);

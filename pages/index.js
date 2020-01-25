@@ -23,7 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch('/.netlify/functions/shifters-content');
+      const res = await fetch('/api/chapters');
       const newChaptersList = await res.json();
       setChapters(newChaptersList);
     })();
