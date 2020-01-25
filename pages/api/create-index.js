@@ -2,9 +2,6 @@ import { google } from 'googleapis';
 import fetch from 'isomorphic-unfetch';
 import Cors from 'micro-cors'
 
-// export CHAPTERS_FOLDER_ID='1W6gVK5xU2VTsXDozyskHojMM2nKEM3Sg';
-// export INDEX_JSON_FILE_ID='1pQUOmyHJDQWhVEzPt9Etg6MOJpfX1lul';
-
 const listFiles = (drive, config) => new Promise((resolve, reject) => {
   drive.files.list(config, (err, res) => {
     if (err) {

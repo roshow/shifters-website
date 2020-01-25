@@ -1,0 +1,7 @@
+{
+  "env": {
+    "INDEX_JSON_FILE_ID": "@shifters-index-id",
+    "CHAPTERS_FOLDER_ID": "@shifters-chapters-folder",
+    "GOOGLE_SERVICE_ACCOUNT": "@shifters-google-account"
+  }
+}
