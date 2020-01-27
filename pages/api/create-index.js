@@ -1,6 +1,5 @@
 import { google } from 'googleapis';
 import fetch from 'isomorphic-unfetch';
-import Cors from 'micro-cors'
 
 const listFiles = (drive, config) => new Promise((resolve, reject) => {
   drive.files.list(config, (err, res) => {
@@ -93,7 +92,11 @@ async function indexChapters() {
 
 }
 
-const handler = async (req, res) =>{
+export default async (req, res) =>{
+  
+  if (req.method !== 'POST') {
+    return res.status(405).send('Method not supported');
+  }
   try {
     await indexChapters();
     res.status(200).send('index.json updated');
@@ -103,9 +106,3 @@ const handler = async (req, res) =>{
   }
   
 };
-
-const cors = Cors({
-  allowMethods: ['POST'],
-});
-
-export default cors(handler);
