@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import fetch from 'isomorphic-unfetch';
 // import Head from 'next/head'
 // import Nav from '../components/nav'
 
@@ -17,17 +18,9 @@ const ChapterDisplay = styled.section`
   }
 `
 
-const Home = () => {
+const Home = (props) => {
 
-  const [chapters, setChapters] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch('/api/chapters');
-      const newChaptersList = await res.json();
-      setChapters(newChaptersList);
-    })();
-  }, []);
+  const { chapters } = props;
 
   return (
     <div>
@@ -41,6 +34,20 @@ const Home = () => {
       })}
     </div>
   );
+}
+
+Home.getInitialProps = async ({ req }) => {
+  
+  let baseUrl = '';
+  if (req) {
+    const { host } = req.headers;
+    const protocol = (host.indexOf('localhost') !== -1) ? 'http' : 'https';
+    baseUrl = `${protocol}://${host}`;
+  }
+  const res = await fetch(`${baseUrl}/api/chapters`);
+  const chapters = await res.json();
+
+  return { chapters };
 }
 
 export default Home
