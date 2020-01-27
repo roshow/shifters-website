@@ -1,11 +1,11 @@
 dependencies:
   googleapis: 47.0.0
   isomorphic-unfetch: 3.0.0
-  micro-cors: 0.1.1
   next: 9.1.7
+  next-absolute-url: 1.2.0
   react: 16.12.0
   react-dom: 16.12.0
-  styled-components: 4.4.1
+  styled-components: 5.0.0
 devDependencies:
   eslint: 6.8.0
   eslint-plugin-react: 7.18.0
@@ -1064,6 +1064,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==
+  /@emotion/stylis/0.8.5:
+    dev: false
+    resolution:
+      integrity: sha512-h6KtPihKFn3T9fuIrwvXXUOwlx3rfUvfZIcP5a6rh8Y7zjE3O06hT5Ss4S/YI1AYhuZ1kjaE/5EaOOI2NqSylQ==
   /@emotion/unitless/0.7.5:
     dev: false
     resolution:
@@ -2277,14 +2281,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-MTu6+tMs9S3EUqzmqLXEcgNRbNkkD/TGFvowpeoWJn5Vfq7FMgsmRQs9X5NXAURiOBmOxm/lLjsDNXDE6k9bhg==
-  /css-to-react-native/2.3.2:
+  /css-to-react-native/3.0.0:
     dependencies:
       camelize: 1.0.0
       css-color-keywords: 1.0.0
-      postcss-value-parser: 3.3.1
+      postcss-value-parser: 4.0.2
     dev: false
     resolution:
-      integrity: sha512-VOFaeZA053BqvvvqIA8c9n0+9vFppVBAHCp6JgFTtTMU3Mzi+XnelJ9XC9ul3BqFzZyQ5N+H0SnwsWT2Ebchxw==
+      integrity: sha512-Ro1yETZA813eoyUp2GDBhG2j+YggidUmzO1/v9eYBKR2EHVEniE2MI/NqpTQ954BMpTPZFsGNPm46qFB9dpaPQ==
   /css/2.2.4:
     dependencies:
       inherits: 2.0.4
@@ -3293,6 +3297,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-0nRXAQJabHdabFRXk+1QL8DGSaE=
+  /hoist-non-react-statics/3.3.2:
+    dependencies:
+      react-is: 16.12.0
+    dev: false
+    resolution:
+      integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
   /hosted-git-info/2.8.5:
     dev: false
     resolution:
@@ -3701,10 +3711,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=
-  /is-what/3.5.1:
-    dev: false
-    resolution:
-      integrity: sha512-NHeqazf97ZVerGNEDmYG4+J4UY3uDQOjaJNMIMXw2i/tFfMconSgSK8Z27Y4VWMbM96E9ylroUSnD7jXRjzBwA==
   /is-windows/1.0.2:
     dev: false
     engines:
@@ -4046,10 +4052,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-xitP+WxNPcTTOgnTJcrhM0xvdPepipPSf3I8EIpGKeFLjt3PlJLIDG3u8EX53ZIubkb+5U2+3rELYpEhHhzdkg==
-  /memoize-one/5.1.1:
-    dev: false
-    resolution:
-      integrity: sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
   /memory-fs/0.4.1:
     dependencies:
       errno: 0.1.7
@@ -4066,22 +4068,10 @@ packages:
       node: '>=4.3.0 <5.0.0 || >=5.10'
     resolution:
       integrity: sha512-jA0rdU5KoQMC0e6ppoNRtpp6vjFq6+NY7r8hywnC7V+1Xj/MtHwGIbB1QaK/dunyjWteJzmkpd7ooeWg10T7GA==
-  /merge-anything/2.4.4:
-    dependencies:
-      is-what: 3.5.1
-    dev: false
-    resolution:
-      integrity: sha512-l5XlriUDJKQT12bH+rVhAHjwIuXWdAIecGwsYjv2LJo+dA1AeRTmeQS+3QBpO6lEthBMDi2IUMpLC1yyRvGlwQ==
   /merge-stream/2.0.0:
     dev: false
     resolution:
       integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==
-  /micro-cors/0.1.1:
-    dev: false
-    engines:
-      node: '>=6'
-    resolution:
-      integrity: sha512-6WqIahA5sbQR1Gjexp1VuWGFDKbZZleJb/gy1khNGk18a6iN1FdTcr3Q8twaxkV5H94RjxIBjirYbWCehpMBFw==
   /microevent.ts/0.1.1:
     dev: false
     resolution:
@@ -4290,6 +4280,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
+  /next-absolute-url/1.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-iXgyo19lUUyO+380y8m1W/ESnW1IjfJ8jPx/WBnyu2bandgoKatOCmdDkIVw/Qb7ZLFx/a8ksUo8qT/x66axKA==
   /next/9.1.7:
     dependencies:
       '@ampproject/toolbox-optimizer': 1.1.1
@@ -5268,10 +5262,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-36P2QR59jDTOAiIkqEprfJDsoNrvwFei3eCqKd1Y0tUsBimsq39BLp7RD+JWny3WgB1zGhJX8XVePwm9k4wdBg==
-  /postcss-value-parser/3.3.1:
-    dev: false
-    resolution:
-      integrity: sha512-pISE66AbVkp4fDQ7VHBwRNXzAAKJjw4Vw7nWI/+Q3vuly7SNfgYXvm6i5IgFylHGK5sP/xHAbB7N49OS4gWNyQ==
   /postcss-value-parser/4.0.2:
     dev: false
     resolution:
@@ -5820,6 +5810,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-QMEp5B7cftE7APOjk5Y6xgrbWu+WkLVQwk8JNjZ8nKRciZaByEW6MubieAiToS7+dwvrjGhH8jRXz3MVd0AYqQ==
+  /shallowequal/1.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
   /shebang-command/1.2.0:
     dependencies:
       shebang-regex: 1.0.0
@@ -6125,28 +6119,25 @@ packages:
       webpack: ^4.0.0
     resolution:
       integrity: sha512-B0dOCFwv7/eY31a5PCieNwMgMhVGFe9w+rh7s/Bx8kfFkrth9zfTZquoYvdw8URgiqxObQKcpW51Ugz1HjfdZw==
-  /styled-components/4.4.1:
+  /styled-components/5.0.0:
     dependencies:
       '@babel/helper-module-imports': 7.8.3
       '@babel/traverse': 7.8.3
       '@emotion/is-prop-valid': 0.8.6
+      '@emotion/stylis': 0.8.5
       '@emotion/unitless': 0.7.5
       babel-plugin-styled-components: 1.10.7
-      css-to-react-native: 2.3.2
-      memoize-one: 5.1.1
-      merge-anything: 2.4.4
-      prop-types: 15.7.2
-      react-is: 16.12.0
-      stylis: 3.5.4
-      stylis-rule-sheet: /stylis-rule-sheet/0.0.10/stylis@3.5.4
+      css-to-react-native: 3.0.0
+      hoist-non-react-statics: 3.3.2
+      shallowequal: 1.1.0
       supports-color: 5.5.0
     dev: false
     peerDependencies:
-      react: '>= 16.3.0'
-      react-dom: '>= 16.3.0'
-    requiresBuild: true
+      react: '>= 16.8.0'
+      react-dom: '>= 16.8.0'
+      react-is: '>= 16.8.0'
     resolution:
-      integrity: sha512-RNqj14kYzw++6Sr38n7197xG33ipEOktGElty4I70IKzQF1jzaD1U4xQ+Ny/i03UUhHlC5NWEO+d8olRCDji6g==
+      integrity: sha512-F7VhIXIbUXJ8KO3pU9wap2Hxdtqa6PZ1uHrx+YXTgRjyxGlwvBHb8LULXPabmDA+uEliTXRJM5WcZntJnKNn3g==
   /styled-jsx/3.2.4:
     dependencies:
       babel-plugin-syntax-jsx: 6.18.0
@@ -6729,8 +6720,8 @@ specifiers:
   eslint-plugin-react: ^7.17.0
   googleapis: ^47.0.0
   isomorphic-unfetch: ^3.0.0
-  micro-cors: ^0.1.1
   next: 9.1.7
+  next-absolute-url: ^1.2.0
   react: 16.12.0
   react-dom: 16.12.0
-  styled-components: ^4.4.1
+  styled-components: ^5.0.0

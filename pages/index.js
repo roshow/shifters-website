@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
-// import Head from 'next/head'
-// import Nav from '../components/nav'
+import absoluteUrl from 'next-absolute-url';
 
 const ChapterDisplay = styled.section`
   display: flex;
@@ -38,13 +37,8 @@ const Home = (props) => {
 
 Home.getInitialProps = async ({ req }) => {
   
-  let baseUrl = '';
-  if (req) {
-    const { host } = req.headers;
-    const protocol = (host.indexOf('localhost') !== -1) ? 'http' : 'https';
-    baseUrl = `${protocol}://${host}`;
-  }
-  const res = await fetch(`${baseUrl}/api/chapters`);
+  let { origin } = absoluteUrl(req, 'localhost:3000');
+  const res = await fetch(`${origin}/api/chapters`);
   const chapters = await res.json();
 
   return { chapters };
