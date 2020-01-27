@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import fetch from 'isomorphic-unfetch';
 // import Head from 'next/head'
 // import Nav from '../components/nav'
 
@@ -17,17 +18,9 @@ const ChapterDisplay = styled.section`
   }
 `
 
-const Home = () => {
+const Home = (props) => {
 
-  const [chapters, setChapters] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch('/api/chapters');
-      const newChaptersList = await res.json();
-      setChapters(newChaptersList);
-    })();
-  }, []);
+  const { chapters } = props;
 
   return (
     <div>
@@ -41,6 +34,15 @@ const Home = () => {
       })}
     </div>
   );
+}
+
+Home.getInitialProps = async ({ req }) => {
+  const referer = req?.headers?.referer;
+  const url = referer ? `${referer}api/chapters` : '/api/chapters';
+  const res = await fetch(url);
+  const chapters = await res.json();
+
+  return { chapters }
 }
 
 export default Home
