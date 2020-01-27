@@ -37,12 +37,17 @@ const Home = (props) => {
 }
 
 Home.getInitialProps = async ({ req }) => {
-  const referer = req?.headers?.referer;
-  const url = referer ? `${referer}api/chapters` : '/api/chapters';
-  const res = await fetch(url);
+  
+  let baseUrl = '';
+  if (req) {
+    const { host } = req.headers;
+    const protocol = (host.indexOf('localhost') !== -1) ? 'http' : 'https';
+    baseUrl = `${protocol}://${host}`;
+  }
+  const res = await fetch(`${baseUrl}/api/chapters`);
   const chapters = await res.json();
 
-  return { chapters }
+  return { chapters };
 }
 
 export default Home
