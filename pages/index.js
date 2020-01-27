@@ -23,6 +23,7 @@ const Home = (props) => {
 
   return (
     <div>
+      <h1>Glitch Branch</h1>
       {chapters.map(({number, title, pages}) => {
         return (
           <ChapterDisplay key={number} className="chapter">
