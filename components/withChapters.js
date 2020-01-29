@@ -2,17 +2,21 @@ import { Component } from 'react';
 import fetch from 'isomorphic-unfetch';
 import absoluteUrl from 'next-absolute-url';
 
-export default (TargetComponent) => {
-  return class WithChapters extends Component {
-    static async getInitialProps ({ req }) {
-      if (req) {
-        let { origin } = absoluteUrl(req, 'localhost:3000');
+export default (PageComponent) => {
+  return class PageWithChapters extends Component {
+    static async getInitialProps (ctx) {
+      let pageProps = {};
+      if (PageComponent.getInitialProps) {
+        pageProps = await PageComponent.getInitialProps(ctx);
+      }
+      if (ctx.req) {
+        let { origin } = absoluteUrl(ctx.req, 'localhost:3000');
         const res = await fetch(`${origin}/api/chapters`);
         const chapters = await res.json();
     
-        return { chapters };
+        return { ...pageProps, chapters };
       }
-      return {};
+      return pageProps;
     }
 
     state = {
@@ -35,7 +39,7 @@ export default (TargetComponent) => {
         chapters: this.state.chapters,
       };
 
-      return <TargetComponent {...pageProps} />;
+      return <PageComponent {...pageProps} />;
     }
 
   }
