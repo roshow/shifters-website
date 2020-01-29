@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import absoluteUrl from 'next-absolute-url';
@@ -42,10 +41,6 @@ Home.getInitialProps = async ({ req }) => {
   const chapters = await res.json();
 
   return { chapters };
-};
-
-Home.propTypes = {
-  chapters: PropTypes.array,
 };
 
 export default Home;
