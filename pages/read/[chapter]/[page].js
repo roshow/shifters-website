@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import absoluteUrl from 'next-absolute-url';
+import useChapters from './../../../hooks/useChapters';
 
 const PageContainer = styled.div`
   display: flex;
@@ -37,10 +37,10 @@ const PageNavContainer = styled.div`
 `;
 
 const ChapterPage = props => {
-  const [chapters] = useState(props.chapters);
+  const chapters = useChapters(props.chapters);
 
   const router = useRouter();
-
+  
   const { chapter, page } = router.query;
 
   const chapterIndex = parseInt(chapter, 10) - 1;
@@ -68,6 +68,9 @@ const ChapterPage = props => {
     }
   }
 
+  if (!chapters) {
+    return <h1>Loading...</h1>;
+  }
   
   return (
     <PageContainer>
