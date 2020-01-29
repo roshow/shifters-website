@@ -7,6 +7,7 @@ dependencies:
   react-dom: 16.12.0
   styled-components: 5.0.0
 devDependencies:
+  babel-eslint: 10.0.3
   eslint: 6.8.0
   eslint-plugin-react: 7.18.0
 packages:
@@ -69,7 +70,6 @@ packages:
       jsesc: 2.5.2
       lodash: 4.17.15
       source-map: 0.5.7
-    dev: false
     resolution:
       integrity: sha512-WjoPk8hRpDRqqzRpvaR8/gDUPkrnOOeuT2m8cNICJtZH6mwaCo3v0OKMI7Y6SM1pBtyijnLtAL0HDi41pf41ug==
   /@babel/helper-annotate-as-pure/7.8.3:
@@ -146,13 +146,11 @@ packages:
       '@babel/helper-get-function-arity': 7.8.3
       '@babel/template': 7.8.3
       '@babel/types': 7.8.3
-    dev: false
     resolution:
       integrity: sha512-BCxgX1BC2hD/oBlIFUgOCQDOPV8nSINxCwM3o93xP4P9Fq6aV5sgv2cOOITDMtCfQ+3PvHp3l689XZvAM9QyOA==
   /@babel/helper-get-function-arity/7.8.3:
     dependencies:
       '@babel/types': 7.8.3
-    dev: false
     resolution:
       integrity: sha512-FVDR+Gd9iLjUMY1fzE2SR0IuaJToR4RkCDARVfsBBPSP53GEqSFjD8gNyxg246VUyc/ALRxFaAK8rVG7UT7xRA==
   /@babel/helper-hoist-variables/7.8.3:
@@ -229,7 +227,6 @@ packages:
   /@babel/helper-split-export-declaration/7.8.3:
     dependencies:
       '@babel/types': 7.8.3
-    dev: false
     resolution:
       integrity: sha512-3x3yOeyBhW851hroze7ElzdkeRXQYQbFIb7gLK1WQYsw2GWDay5gAJNw1sWJ0VFP6z5J1whqeXH/WCdCjZv6dA==
   /@babel/helper-wrap-function/7.8.3:
@@ -257,7 +254,6 @@ packages:
     resolution:
       integrity: sha512-PX4y5xQUvy0fnEVHrYOarRPXVWafSjTW9T0Hab8gVIawpl2Sj0ORyrygANq+KjcNlSSTw0YCLSNA8OyZ1I4yEg==
   /@babel/parser/7.8.3:
-    dev: false
     engines:
       node: '>=6.0.0'
     hasBin: true
@@ -1023,7 +1019,6 @@ packages:
       '@babel/code-frame': 7.8.3
       '@babel/parser': 7.8.3
       '@babel/types': 7.8.3
-    dev: false
     resolution:
       integrity: sha512-04m87AcQgAFdvuoyiQ2kgELr2tV8B4fP/xJAVUL3Yb3bkNdMedD3d0rlSQr3PegP0cms3eHjl1F7PWlvWbU8FQ==
   /@babel/traverse/7.8.3:
@@ -1037,7 +1032,6 @@ packages:
       debug: 4.1.1
       globals: 11.12.0
       lodash: 4.17.15
-    dev: false
     resolution:
       integrity: sha512-we+a2lti+eEImHmEXp7bM9cTxGzxPmBiVJlLVD+FuuQMeeO7RaDbutbgeheDkw+Xe3mCfJHnGOWLswT74m2IPg==
   /@babel/types/7.8.3:
@@ -1045,7 +1039,6 @@ packages:
       esutils: 2.0.3
       lodash: 4.17.15
       to-fast-properties: 2.0.0
-    dev: false
     resolution:
       integrity: sha512-jBD+G8+LWpMBBWvVcdr4QysjUE4mU/syrhN17o1u3gx0/WzJB1kwiVZAXRtWbsIPOwW8pF/YJV5+nmetPzepXg==
   /@csstools/convert-colors/1.4.0:
@@ -1524,6 +1517,21 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==
+  /babel-eslint/10.0.3:
+    dependencies:
+      '@babel/code-frame': 7.8.3
+      '@babel/parser': 7.8.3
+      '@babel/traverse': 7.8.3
+      '@babel/types': 7.8.3
+      eslint-visitor-keys: 1.1.0
+      resolve: 1.15.0
+    dev: true
+    engines:
+      node: '>=6'
+    peerDependencies:
+      eslint: '>= 4.12.1'
+    resolution:
+      integrity: sha512-z3U7eMY6r/3f3/JB9mTsLjyxrv0Yb1zb8PCWCLpguxfCzBIZUwy23R1t/XKewP+8mEN2Ck8Dtr4q20z6ce6SoA==
   /babel-loader/8.0.6/@babel!core@7.7.2+webpack@4.41.2:
     dependencies:
       '@babel/core': 7.7.2
@@ -3114,7 +3122,6 @@ packages:
     resolution:
       integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==
   /globals/11.12.0:
-    dev: false
     engines:
       node: '>=4'
     resolution:
@@ -3793,7 +3800,6 @@ packages:
     resolution:
       integrity: sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=
   /jsesc/2.5.2:
-    dev: false
     engines:
       node: '>=4'
     hasBin: true
@@ -5912,7 +5918,6 @@ packages:
     resolution:
       integrity: sha1-PpNdfd1zYxuXZZlW1VEo6HtQhKM=
   /source-map/0.5.7:
-    dev: false
     engines:
       node: '>=0.10.0'
     resolution:
@@ -6302,7 +6307,6 @@ packages:
     resolution:
       integrity: sha1-uDVx+k2MJbguIxsG46MFXeTKGkc=
   /to-fast-properties/2.0.0:
-    dev: false
     engines:
       node: '>=4'
     resolution:
@@ -6716,6 +6720,7 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
+  babel-eslint: ^10.0.3
   eslint: ^6.8.0
   eslint-plugin-react: ^7.17.0
   googleapis: ^47.0.0

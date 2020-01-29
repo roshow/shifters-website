@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import fetch from 'isomorphic-unfetch';
-import absoluteUrl from 'next-absolute-url';
+import withChapters from '../components/withChapters';
 
-const ChapterDisplay = styled.section`
+export const ChapterDisplay = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,32 +15,20 @@ const ChapterDisplay = styled.section`
   }
 `
 
-const Home = (props) => {
+export const ChapterView = ({number, title, pages}) => (
+  <ChapterDisplay key={number} className="chapter">
+    <h1>Chapter {number}: {title}</h1>
+    {pages.map(pageId => <img key={pageId} src={`https://drive.google.com/uc?id=${pageId}`}/>)}
+  </ChapterDisplay>
+);
 
-  const { chapters } = props;
+const Home = ({ chapters } ) => {
 
   return (
     <div>
-      <h1>Glitch Branch</h1>
-      {chapters.map(({number, title, pages}) => {
-        return (
-          <ChapterDisplay key={number} className="chapter">
-            <h1>Chapter {number}: {title}</h1>
-            {pages.map(pageId => <img key={pageId} src={`https://drive.google.com/uc?id=${pageId}`}/>)}
-          </ChapterDisplay>
-        );
-      })}
+      {chapters.map(ChapterView)}
     </div>
   );
-}
+};
 
-Home.getInitialProps = async ({ req }) => {
-  
-  let { origin } = absoluteUrl(req, 'localhost:3000');
-  const res = await fetch(`${origin}/api/chapters`);
-  const chapters = await res.json();
-
-  return { chapters };
-}
-
-export default Home
+export default withChapters(Home);

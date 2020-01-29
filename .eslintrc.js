@@ -4,6 +4,7 @@ module.exports = {
         "node": true,
         "es6": true
     },
+    "parser": "babel-eslint",
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
@@ -23,6 +24,7 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "react/react-in-jsx-scope": 0
+        "react/react-in-jsx-scope": 0,
+        "react/prop-types": 0
     }
 };
