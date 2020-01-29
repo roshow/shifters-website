@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import withChapters from './../hoc/withChapters';
+import withChapters from '../components/withChapters';
 
 const ChapterDisplay = styled.section`
   display: flex;

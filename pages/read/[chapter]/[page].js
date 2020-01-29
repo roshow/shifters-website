@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styled from 'styled-components';
-import withChapters from './../../../hoc/withChapters';
+import withChapters from '../../../components/withChapters';
 
 const PageContainer = styled.div`
   display: flex;
