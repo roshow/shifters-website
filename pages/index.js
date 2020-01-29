@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import fetch from 'isomorphic-unfetch';
-import absoluteUrl from 'next-absolute-url';
-import useChapters from './../hooks/useChapters';
+import withChapters from './../hoc/withChapters';
 
 const ChapterDisplay = styled.section`
   display: flex;
@@ -17,9 +15,7 @@ const ChapterDisplay = styled.section`
   }
 `
 
-const Home = (props) => {
-
-  const chapters = useChapters(props.chapters);
+const Home = ({ chapters }) => {
 
   if (!chapters) {
     return <h1>Loading...</h1>;
@@ -39,16 +35,4 @@ const Home = (props) => {
   );
 };
 
-Home.getInitialProps = async ({ req }) => {
-  
-  if (req) {
-    let { origin } = absoluteUrl(req, 'localhost:3000');
-    const res = await fetch(`${origin}/api/chapters`);
-    const chapters = await res.json();
-
-    return { chapters };
-  }
-  return {};
-};
-
-export default Home;
+export default withChapters(Home);
