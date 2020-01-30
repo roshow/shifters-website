@@ -3,7 +3,7 @@ import ReadModeToggle from './../components/ReadModeToggle';
 import withChapters from './../components/withChapters';
 
 const Home = ({ chapters } ) => {
-  const [ chapter ] = chapters;
+  const [ chapterData ] = chapters;
   const nextPage = {
     readUrl: '/read/1/1',
   };
@@ -11,7 +11,7 @@ const Home = ({ chapters } ) => {
     <>
       <ReadModeToggle chapter="1" mode="page" />
       <SinglePage
-        chapter={chapter}
+        chapterData={chapterData}
         pageIndex={0}
         nextPage={nextPage}
       />

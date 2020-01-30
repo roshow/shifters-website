@@ -32,31 +32,49 @@ const PageNavContainer = styled.div`
   }
 `;
 
-const ReadLink = ({readUrl, children}) => {
-  if (!readUrl) {
-    return null;
-  }
-  return (
-    <Link href="/read/[chapter]/[page]" as={readUrl}>
-      <a>{children}</a>
-    </Link>
-  );
-};
+const PreLoadingDiv = styled.div`
+  height: 0px;
+  width: 0px;
+  overflow: hidden;
+`;
 
-const SinglePage = ({ chapter, pageIndex, prevPage = {}, nextPage = {} }) => {
+
+const SinglePage = ({ chapterData, pageIndex, prevPage = {}, nextPage = {} }) => {
+  const { title, number, pages } = chapterData;
+  const imgSrc = pages[pageIndex];
   return (
     <PageContainer>
-      <h2>Chapter {chapter.number}: {chapter.title}</h2>
+      <h2>Chapter {number}: {title}</h2>
+      
       <PageNavContainer>
         <div>
-          <ReadLink readUrl={prevPage.readUrl}>prev</ReadLink>
+          {prevPage.readUrl && (
+            <Link href="/read/[chapter]/[page]" as={prevPage.readUrl}>
+              <a>prev</a>
+            </Link>
+          )}
         </div>
+        
         <h3>{ pageIndex > 0 ? `page ${pageIndex}` : 'cover' }</h3>
+        
         <div>
-          <ReadLink readUrl={nextPage.readUrl}>next</ReadLink>
+         {nextPage.readUrl && (
+            <Link href="/read/[chapter]/[page]" as={nextPage.readUrl}>
+              <a>next</a>
+            </Link>
+          )}
+
         </div>
-      </PageNavContainer>     
-      <PageImg src={chapter.pages[pageIndex]}/>
+      
+      </PageNavContainer>
+      
+      <PageImg src={imgSrc} />
+      
+      <PreLoadingDiv>
+        <PageImg src={prevPage.src} />
+        <PageImg src={nextPage.src} />
+      </PreLoadingDiv>
+      
     </PageContainer>
   );
 }

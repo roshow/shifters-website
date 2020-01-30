@@ -36,14 +36,12 @@ const ChapterPage = ({ chapters }) => {
   
   if (nextPageIndex >= 0) {
     nextPage.readUrl = `/read/${nextChapterIndex + 1}/${nextPageIndex}`;
-    console.log({nextPage});
     nextPage.src = chapters[nextChapterIndex].pages[nextPageIndex];
   }
   
   const prevPage = {};
   
   if (prevPageIndex >= 0) {
-    console.log({ prevPageIndex });
     prevPage.readUrl = `/read/${prevChapterIndex + 1}/${prevPageIndex}`;
     prevPage.src = chapters[prevChapterIndex].pages[prevPageIndex];
   }
@@ -52,7 +50,7 @@ const ChapterPage = ({ chapters }) => {
     <>
       <ReadModeToggle chapter={chapter} mode="page" />
       <SinglePage
-        chapter={chapters[chapterIndex]}
+        chapterData={chapters[chapterIndex]}
         pageIndex={pageIndex}
         nextPage={nextPage}
         prevPage={prevPage}
