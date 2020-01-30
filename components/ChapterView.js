@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Img from 'react-image';
 
 export const ChapterDisplay = styled.section`
   display: flex;
@@ -14,7 +15,9 @@ export const ChapterDisplay = styled.section`
 const ChapterView = ({number, title, pages}) => (
   <ChapterDisplay key={number} className="chapter">
     <h1>Chapter {number}: {title}</h1>
-    {pages.map(pageId => <img key={pageId} src={`https://drive.google.com/uc?id=${pageId}`}/>)}
+    {pages.map(pageId => 
+      <Img key={pageId} src={`https://drive.google.com/uc?id=${pageId}`} loader={<h4>Loading...</h4>}/>)
+    }
   </ChapterDisplay>
 );
 
