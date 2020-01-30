@@ -2,13 +2,12 @@ import { useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 import absoluteUrl from 'next-absolute-url';
 
-export default (PageComponent) => {
-  
+const withChapters = (PageComponent) => {
   const PageWithChapters = (props) => {
     const { chapters, setChapters } = props;
     
     useEffect(() => {
-      if (!chapters) {
+      if (!chapters.length) {
         (async () => {
           const res = await fetch('/api/chapters');
           const newChapters = await res.json();
@@ -17,7 +16,7 @@ export default (PageComponent) => {
       }
     },[chapters, setChapters]);
     
-    if (!props.chapters) {
+    if (!chapters.length) {
       return <h1>Loading...</h1>;
     }
     
@@ -31,16 +30,18 @@ export default (PageComponent) => {
       pageProps = await PageComponent.getInitialProps(ctx);
     }
     
+    let chapters = [];
+
     if (ctx.req) {
       let { origin } = absoluteUrl(ctx.req, 'localhost:3000');
       const res = await fetch(`${origin}/api/chapters`);
-      const chapters = await res.json();
-      return { ...pageProps, chapters };
+      chapters = await res.json();
     }
     
-    return pageProps;
+    return { ...pageProps, chapters };
   };
   
   return PageWithChapters;
-  
 };
+
+export default withChapters;

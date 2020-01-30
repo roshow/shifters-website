@@ -3,7 +3,8 @@ import { useState } from 'react';
 
 function MyApp({ Component, pageProps }) {
   
-  const [chapters, setChapters] = useState(pageProps.chapters);
+  const { chapters: initialChapters = [] } = pageProps;
+  const [chapters, setChapters] = useState(initialChapters);
   
   const allProps = {
     ...pageProps,

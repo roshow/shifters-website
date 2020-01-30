@@ -12,7 +12,7 @@ const StyledAdmin = styled.div`
   }
 `
 
-const AdminPage = () => {
+const AdminPage = ({ setChapters }) => {
 
   const [didPublish, setDidPublish] = useState(false);
 
@@ -23,12 +23,15 @@ const AdminPage = () => {
   const publishChapters = async () => {
     setIsPublishing(true);
     setDidPublish(false);
-    const { status } = await fetch('/api/create-index', {
+    const res = await fetch('/api/create-index', {
       method: 'POST',
     });
     setDidPublish(true);
-    if (status !== 200) {
+    if (res.status !== 200) {
       setIsErrorPublishing(true);
+    } else {
+      const newChapters = await res.json();
+      setChapters(newChapters);
     }
     setIsPublishing(false);
   };
