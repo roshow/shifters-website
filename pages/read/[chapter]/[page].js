@@ -12,8 +12,6 @@ const ChapterPage = ({ chapters }) => {
   const chapterIndex = parseInt(chapter, 10) - 1;
   const pageIndex = parseInt(page, 10);
 
-  const pageId = chapters[chapterIndex].pages[pageIndex];
-
   let prevChapterIndex = chapterIndex;
   let prevPageIndex = pageIndex - 1;
   if (prevPageIndex < 0) {
