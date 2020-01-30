@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import Img from 'react-image';
+import PageImg from './PageImg';
 
 const PageContainer = styled.div`
   display: flex;
@@ -9,11 +9,10 @@ const PageContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const PageImage = styled(Img)`
-  width: 100%;
-  max-width: 600px;
+  img {
+    width: 100%;
+    max-width: 600px;
+  }
 `;
 
 const PageNavContainer = styled.div`
@@ -58,12 +57,7 @@ const SinglePage = ({ chapter, pageIndex, prevPage, nextPage}) => {
           <ReadLink indexes={nextPage}>next</ReadLink>
         </div>
       </PageNavContainer>     
-      <PageImage 
-        src={`https://drive.google.com/uc?id=${chapter.pages[pageIndex]}`}
-        loader={<h4>Loading...</h4>}
-        alt=""
-      />
-      
+      <PageImg src={chapter.pages[pageIndex]}/>
     </PageContainer>
   );
 }
