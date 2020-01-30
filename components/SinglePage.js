@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import PageImg from './PageImg';
 
 const PageContainer = styled.div`
   display: flex;
@@ -8,11 +9,10 @@ const PageContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const PageImage = styled.img`
-  width: 100%;
-  max-width: 600px;
+  img {
+    width: 100%;
+    max-width: 600px;
+  }
 `;
 
 const PageNavContainer = styled.div`
@@ -32,33 +32,31 @@ const PageNavContainer = styled.div`
   }
 `;
 
-const ReadLink = ({indexes, children}) => {
-  if (!indexes) {
+const ReadLink = ({readUrl, children}) => {
+  if (!readUrl) {
     return null;
   }
-  const [chapterIndex, pageIndex ] = indexes;
   return (
-    <Link href="/read/[chapter]/[page]" as={`/read/${chapterIndex + 1}/${pageIndex}`}>
+    <Link href="/read/[chapter]/[page]" as={readUrl}>
       <a>{children}</a>
     </Link>
   );
 };
 
-const SinglePage = ({ chapter, pageIndex, prevPage, nextPage}) => {
+const SinglePage = ({ chapter, pageIndex, prevPage = {}, nextPage = {} }) => {
   return (
     <PageContainer>
       <h2>Chapter {chapter.number}: {chapter.title}</h2>
       <PageNavContainer>
         <div>
-          <ReadLink indexes={prevPage}>prev</ReadLink>
+          <ReadLink readUrl={prevPage.readUrl}>prev</ReadLink>
         </div>
         <h3>{ pageIndex > 0 ? `page ${pageIndex}` : 'cover' }</h3>
         <div>
-          <ReadLink indexes={nextPage}>next</ReadLink>
+          <ReadLink readUrl={nextPage.readUrl}>next</ReadLink>
         </div>
       </PageNavContainer>     
-      <PageImage src={`https://drive.google.com/uc?id=${chapter.pages[pageIndex]}`} alt=""/>
-      
+      <PageImg src={chapter.pages[pageIndex]}/>
     </PageContainer>
   );
 }
