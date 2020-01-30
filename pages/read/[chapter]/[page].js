@@ -35,7 +35,7 @@ const ChapterPage = ({ chapters }) => {
   const nextPage = {};
   
   if (nextPageIndex >= 0) {
-    nextPage.readUrl = `/read/${nextChapterIndex}/${nextPageIndex}`;
+    nextPage.readUrl = `/read/${nextChapterIndex + 1}/${nextPageIndex}`;
     console.log({nextPage});
     nextPage.src = chapters[nextChapterIndex].pages[nextPageIndex];
   }
@@ -44,7 +44,7 @@ const ChapterPage = ({ chapters }) => {
   
   if (prevPageIndex >= 0) {
     console.log({ prevPageIndex });
-    prevPage.readUrl = `/read/${prevChapterIndex}/${prevPageIndex}`;
+    prevPage.readUrl = `/read/${prevChapterIndex + 1}/${prevPageIndex}`;
     prevPage.src = chapters[prevChapterIndex].pages[prevPageIndex];
   }
   
