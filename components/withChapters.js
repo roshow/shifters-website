@@ -1,46 +1,47 @@
-import { Component } from 'react';
+import { useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 import absoluteUrl from 'next-absolute-url';
 
-export default (PageComponent) => {
-  return class PageWithChapters extends Component {
-    static async getInitialProps (ctx) {
-      let pageProps = {};
-      if (PageComponent.getInitialProps) {
-        pageProps = await PageComponent.getInitialProps(ctx);
-      }
-      if (ctx.req) {
-        let { origin } = absoluteUrl(ctx.req, 'localhost:3000');
-        const res = await fetch(`${origin}/api/chapters`);
-        const chapters = await res.json();
+const withChapters = (PageComponent) => {
+  const PageWithChapters = (props) => {
+    const { chapters, setChapters } = props;
     
-        return { ...pageProps, chapters };
+    useEffect(() => {
+      if (!chapters.length) {
+        (async () => {
+          const res = await fetch('/api/chapters');
+          const newChapters = await res.json();
+          setChapters(newChapters);
+        })();
       }
-      return pageProps;
+    },[chapters, setChapters]);
+    
+    if (!chapters.length) {
+      return <h1>Loading...</h1>;
     }
-
-    state = {
-      chapters: this.props.chapters
+    
+    return <PageComponent {...props} />;
+  };
+  
+  PageWithChapters.getInitialProps = async (ctx) => {
+    let pageProps = {};
+    
+    if (PageComponent.getInitialProps) {
+      pageProps = await PageComponent.getInitialProps(ctx);
     }
+    
+    let chapters = [];
 
-    async componentDidMount () {
-      if (!this.state.chapters) {
-        const res = await fetch('/api/chapters');
-        const chapters = await res.json();
-        this.setState({
-          chapters,
-        });
-      }
+    if (ctx.req) {
+      let { origin } = absoluteUrl(ctx.req, 'localhost:3000');
+      const res = await fetch(`${origin}/api/chapters`);
+      chapters = await res.json();
     }
+    
+    return { ...pageProps, chapters };
+  };
+  
+  return PageWithChapters;
+};
 
-    render () {
-      const pageProps = {
-        ...this.props,
-        chapters: this.state.chapters,
-      };
-
-      return <PageComponent {...pageProps} />;
-    }
-
-  }
-}
+export default withChapters;

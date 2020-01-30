@@ -85,7 +85,7 @@ async function indexChapters() {
       if (err) {
         reject(err);
       } else {
-        resolve();
+        resolve(chaptersOrdered);
       }
     });
   });
@@ -98,8 +98,8 @@ export default async (req, res) =>{
     return res.status(405).send('Method not supported');
   }
   try {
-    await indexChapters();
-    res.status(200).send('index.json updated');
+    const chapters = await indexChapters();
+    res.status(200).json(chapters);
   } catch (e) {
     console.log('Error with indexChapters:', e);
     res.status(500).send('Something did not go right on our end I think');

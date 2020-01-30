@@ -1,38 +1,18 @@
-import styled from 'styled-components';
-import withChapters from '../components/withChapters';
+import SinglePage from './../components/SinglePage';
+import ReadModeToggle from './../components/ReadModeToggle';
+import withChapters from './../components/withChapters';
 
-const ChapterDisplay = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  h1 {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  img {
-    width: 100%;
-    max-width: 200px;
-    margin: 10px;
-  }
-`
-
-const Home = ({ chapters }) => {
-
-  if (!chapters) {
-    return <h1>Loading...</h1>;
-  }
-
+const Home = ({ chapters } ) => {
   return (
-    <div>
-      {chapters.map(({number, title, pages}) => {
-        return (
-          <ChapterDisplay key={number} className="chapter">
-            <h1>Chapter {number}: {title}</h1>
-            {pages.map(pageId => <img key={pageId} src={`https://drive.google.com/uc?id=${pageId}`}/>)}
-          </ChapterDisplay>
-        );
-      })}
-    </div>
-  );
-};
+    <>
+      <ReadModeToggle chapter="1" mode="page" />
+      <SinglePage
+        chapter={chapters[0]}
+        pageIndex={0}
+        nextPage={[0,1]}
+      />
+    </>
+  );  
+}
 
 export default withChapters(Home);
