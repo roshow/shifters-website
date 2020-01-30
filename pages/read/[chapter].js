@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
-import { ChapterView } from './../index';
-import SinglePage from './../../components/SinglePage';
+import ChapterView from './../../components/ChapterView';
 import ReadModeToggle from './../../components/ReadModeToggle';
 import withChapters from '../../components/withChapters';
 

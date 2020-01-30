@@ -44,7 +44,7 @@ const AdminPage = () => {
 
       {!isPublishing && !isErrorPublishing && <button onClick={publishChapters}>Publish Shifters Chapters</button>}
 
-      <h4><Link href="/"><a>Return to main site.</a></Link></h4>
+      <h4><Link href="/allpages"><a>Go See All Pages</a></Link></h4>
     </StyledAdmin>
   );
 };
