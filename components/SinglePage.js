@@ -37,13 +37,6 @@ const PageNavContainer = styled.div`
   }
 `;
 
-const PreLoadingDiv = styled.div`
-  height: 0px;
-  width: 0px;
-  overflow: hidden;
-`;
-
-
 const SinglePage = ({ chapterData, pageIndex, prevPage = {}, nextPage = {} }) => {
   const { title, number, pages } = chapterData;
   const imgSrc = pages[pageIndex];
@@ -73,9 +66,9 @@ const SinglePage = ({ chapterData, pageIndex, prevPage = {}, nextPage = {} }) =>
       
       </PageNavContainer>
       
-      <PageImg src={imgSrc} key={imgSrc} />
-      <PageImg className="hidden" src={prevPage.src} key={prevPage.src} />
-      <PageImg className="hidden" src={nextPage.src} key={nextPage.src} />
+      <PageImg key={imgSrc} src={imgSrc} />
+      <PageImg key={prevPage.src} src={prevPage.src} className="hidden"/>
+      <PageImg key={nextPage.src} src={nextPage.src} className="hidden"/>
       
     </PageContainer>
   );
