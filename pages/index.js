@@ -6,6 +6,7 @@ const Home = ({ chapters } ) => {
   const [ chapterData ] = chapters;
   const nextPage = {
     readUrl: '/read/1/1',
+    src: chapters[0].pages[1],
   };
   return (
     <>
