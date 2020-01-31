@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import SinglePage from './../../../components/SinglePage';
+import PageView from './../../../components/PageView';
 import ReadModeToggle from './../../../components/ReadModeToggle';
 import withChapters from '../../../components/withChapters';
 
@@ -32,15 +32,25 @@ const ChapterPage = ({ chapters }) => {
     }
   }
   
-  const nextPage = nextPageIndex >= 0 && [nextChapterIndex, nextPageIndex];
+  const nextPage = {};
   
-  const prevPage = prevPageIndex >= 0 && [prevChapterIndex, prevPageIndex];
+  if (nextPageIndex >= 0) {
+    nextPage.readUrl = `/read/${nextChapterIndex + 1}/${nextPageIndex}`;
+    nextPage.src = chapters[nextChapterIndex].pages[nextPageIndex];
+  }
+  
+  const prevPage = {};
+  
+  if (prevPageIndex >= 0) {
+    prevPage.readUrl = `/read/${prevChapterIndex + 1}/${prevPageIndex}`;
+    prevPage.src = chapters[prevChapterIndex].pages[prevPageIndex];
+  }
   
   return (
     <>
       <ReadModeToggle chapter={chapter} mode="page" />
-      <SinglePage
-        chapter={chapters[chapterIndex]}
+      <PageView
+        chapterData={chapters[chapterIndex]}
         pageIndex={pageIndex}
         nextPage={nextPage}
         prevPage={prevPage}

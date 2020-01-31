@@ -2,17 +2,22 @@ import { useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 import absoluteUrl from 'next-absolute-url';
 
+const API_ENDPOINT = '/api/chapters';
+
+const fetchChapters = async (req) => {
+  const { origin } = absoluteUrl(req, 'localhost:3000');
+  const res = await fetch(`${origin}${API_ENDPOINT}`);
+  const chapters = await res.json();
+  return chapters;
+}
+
 const withChapters = (PageComponent) => {
   const PageWithChapters = (props) => {
     const { chapters, setChapters } = props;
     
     useEffect(() => {
       if (!chapters.length) {
-        (async () => {
-          const res = await fetch('/api/chapters');
-          const newChapters = await res.json();
-          setChapters(newChapters);
-        })();
+        fetchChapters().then(setChapters); // hey look, a promise!
       }
     },[chapters, setChapters]);
     
@@ -25,17 +30,13 @@ const withChapters = (PageComponent) => {
   
   PageWithChapters.getInitialProps = async (ctx) => {
     let pageProps = {};
-    
     if (PageComponent.getInitialProps) {
       pageProps = await PageComponent.getInitialProps(ctx);
     }
     
     let chapters = [];
-
     if (ctx.req) {
-      let { origin } = absoluteUrl(ctx.req, 'localhost:3000');
-      const res = await fetch(`${origin}/api/chapters`);
-      chapters = await res.json();
+      chapters = await fetchChapters(ctx.req);
     }
     
     return { ...pageProps, chapters };
