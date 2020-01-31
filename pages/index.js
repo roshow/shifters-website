@@ -1,4 +1,4 @@
-import SinglePage from './../components/SinglePage';
+import PageView from '../components/PageView';
 import ReadModeToggle from './../components/ReadModeToggle';
 import withChapters from './../components/withChapters';
 
@@ -11,7 +11,7 @@ const Home = ({ chapters } ) => {
   return (
     <>
       <ReadModeToggle chapter="1" mode="page" />
-      <SinglePage
+      <PageView
         chapterData={chapterData}
         pageIndex={0}
         nextPage={nextPage}
