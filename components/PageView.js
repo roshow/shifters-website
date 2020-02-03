@@ -13,7 +13,7 @@ const ViewContainer = styled.div`
   .page-window {
     max-width: 600px;
     overflow: hidden;
-    .page-container {
+    > div {
       display: flex;
       flex-direction: row;
       width: 300%;
@@ -27,7 +27,7 @@ const ViewContainer = styled.div`
         transition: transform 0.7s;
         transform: translateX(-66.666%);
       }
-      .page-img {
+      > div {
         flex: 1;
         img {
           width: 100%;
@@ -104,10 +104,10 @@ const PageView = ({ chapterData, pageIndex, prevPage = {}, nextPage = {} }) => {
       </PageNav>
       
       <div className="page-window">
-        <div ref={animElRef} className={`page-container ${animClass}`}>
-          <PageImg key={prevPage.src} src={prevPage.src} className={`page-img`}/>
-          <PageImg key={imgSrc} src={imgSrc} className={`page-img`}/>
-          <PageImg key={nextPage.src} src={nextPage.src} className={`page-img`}/>
+        <div ref={animElRef} className={animClass}>
+          <PageImg key={prevPage.src} src={prevPage.src} />
+          <PageImg key={imgSrc} src={imgSrc} />
+          <PageImg key={nextPage.src} src={nextPage.src} />
         </div>
       </div>
       
