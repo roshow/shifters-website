@@ -53,49 +53,58 @@ const PageNav = styled.div`
   }
 `;
 
+const PageView = ({ chapterData, pageIndex, prevPage = {}, nextPage = {} }) => {
+  const { title, number, pages } = chapterData;
+  
+  const imgSrc = pages[pageIndex];
+  const imgSrcRef = useRef(imgSrc);
+  const imgSrcChangedThisRender = imgSrc !== imgSrcRef.current;
+  imgSrcRef.current = imgSrc;
 
-const SinglePage = ({ chapterData, pageIndex, prevPage = {}, nextPage = {} }) => {
+  const [pageToAnimate, setPageToAnimate] = useState('');
 
   const router = useRouter();
 
-  const animRef = useRef(); 
-
-  const [newPage, setNewPage] = useState('');
-  
-  const { title, number, pages } = chapterData;
-  const imgSrc = pages[pageIndex];
+  const animElRef = useRef();
 
   useEffect(() => {
     const onAnimationEnd = () => {
-      console.log('test anim end', { newPage });
-      const { readUrl } = newPage === 'prev-page' ? prevPage : nextPage;
+      const { readUrl } = pageToAnimate === 'prev-page' ? prevPage : nextPage;
       router.push('/read/[chapter]/[page]', readUrl);
-      setNewPage('');
     }
-    if (animRef.current) {
-      animRef.current.addEventListener('transitionend', onAnimationEnd);
+    if (animElRef.current) {
+      animElRef.current.addEventListener('transitionend', onAnimationEnd);
     }
 
     return () => {
-      if (animRef.current) {
-        animRef.current.removeEventListener('transitionend', onAnimationEnd);
+      if (animElRef.current) {
+        animElRef.current.removeEventListener('transitionend', onAnimationEnd);
       }
     }
 
-  }, [animRef, newPage]);
+  }, [animElRef, pageToAnimate]);
+
+
+  useEffect(() => {
+    if (imgSrcChangedThisRender) {
+      setPageToAnimate('');
+    }
+  }, [imgSrcChangedThisRender]);
+
+  const animClass = !imgSrcChangedThisRender ? pageToAnimate : '';
   
   return (
     <ViewContainer>
       <h2>Chapter {number}: {title}</h2>
       
       <PageNav>
-        {prevPage.readUrl && <button onClick={() => setNewPage('prev-page')}>prev</button> || <div />}     
+        {prevPage.readUrl && <button onClick={() => setPageToAnimate('prev-page')}>prev</button> || <div />}     
         <h3>{ pageIndex > 0 ? `page ${pageIndex}` : 'cover' }</h3>
-        {nextPage.readUrl && <button onClick={() => setNewPage('next-page')}>next</button> || <div />}
+        {nextPage.readUrl && <button onClick={() => setPageToAnimate('next-page')}>next</button> || <div />}
       </PageNav>
       
       <div className="page-window">
-        <div ref={animRef} className={`page-container ${newPage}`}>
+        <div ref={animElRef} className={`page-container ${animClass}`}>
           <PageImg key={prevPage.src} src={prevPage.src} className={`page-img`}/>
           <PageImg key={imgSrc} src={imgSrc} className={`page-img`}/>
           <PageImg key={nextPage.src} src={nextPage.src} className={`page-img`}/>
@@ -106,4 +115,4 @@ const SinglePage = ({ chapterData, pageIndex, prevPage = {}, nextPage = {} }) =>
   );
 }
 
-export default SinglePage;
+export default PageView;
