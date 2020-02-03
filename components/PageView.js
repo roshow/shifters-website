@@ -29,13 +29,9 @@ const ViewContainer = styled.div`
       }
       > div {
         flex: 1;
-        img {
-          width: 100%;
-        }
       }
     }
   }
-  
 `;
 
 const PageNav = styled.div`

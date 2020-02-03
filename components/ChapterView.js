@@ -1,22 +1,22 @@
 import styled from 'styled-components';
 import PageImg from './PageImg';
 
-export const ChapterDisplay = styled.section`
+const PageImgStyled = styled(PageImg)`
+  width: 100%;
+  max-width: 200px;
+  margin: 10px;
+`
+
+export const ChapterDisplay = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  img {
-    width: 100%;
-    max-width: 200px;
-    margin: 10px;
-  }
 `
 
 const ChapterView = ({number, title, pages}) => (
   <ChapterDisplay key={number} className="chapter">
-    <h1>Chapter {number}: {title}</h1>
-    {pages.map(pageId => <PageImg key={pageId} src={pageId} />)
-}
+    <h2>Chapter {number}: {title}</h2>
+    {pages.map(pageId => <PageImgStyled key={pageId} src={pageId} />)}
   </ChapterDisplay>
 );
 
