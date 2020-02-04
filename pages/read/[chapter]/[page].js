@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 import PageView from './../../../components/PageView';
 import ReadModeToggle from './../../../components/ReadModeToggle';
 import withChapters from '../../../components/withChapters';
@@ -7,7 +8,7 @@ const ChapterPage = ({ chapters }) => {
 
   const router = useRouter();
 
-  const { chapter, page } = router.query;
+  const { query: { chapter, page } } = router;
 
   const chapterIndex = parseInt(chapter, 10) - 1;
   const pageIndex = parseInt(page, 10);
@@ -46,8 +47,21 @@ const ChapterPage = ({ chapters }) => {
     prevPage.src = chapters[prevChapterIndex].pages[prevPageIndex];
   }
   
+  const openGraphTitle = `Shifters, Chapter ${chapter}, ${pageIndex === 0 ? 'Cover' : `Page ${page}`}`;    
+  const imgSrc = `https://drive.google.com/uc?id=${chapters[chapterIndex].pages[pageIndex]}`;
+  
+  const seoProps = {
+    openGraph: {
+      title: openGraphTitle,
+      images: [
+        { url: imgSrc },
+      ]
+    } 
+  }
+  
   return (
     <>
+      <NextSeo {...seoProps} />
       <ReadModeToggle chapter={chapter} mode="page" />
       <PageView
         chapterData={chapters[chapterIndex]}

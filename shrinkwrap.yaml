@@ -3,6 +3,7 @@ dependencies:
   isomorphic-unfetch: 3.0.0
   next: 9.1.7
   next-absolute-url: 1.2.0
+  next-seo: 4.1.0
   react: 16.12.0
   react-dom: 16.12.0
   react-image: 2.2.2
@@ -4302,6 +4303,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-iXgyo19lUUyO+380y8m1W/ESnW1IjfJ8jPx/WBnyu2bandgoKatOCmdDkIVw/Qb7ZLFx/a8ksUo8qT/x66axKA==
+  /next-seo/4.1.0:
+    dev: false
+    peerDependencies:
+      prop-types: ^15.6.0
+      react: ^16.0.0
+      react-dom: ^16.0.0
+    resolution:
+      integrity: sha512-wHFrn20xc1jPaCaAviD11F1lNdmbp07kysFiLXZTArIqk8YSWOXCEkmh3kgVuXBkHeZOhIUdbuEc9xtf0LgCLg==
   /next/9.1.7:
     dependencies:
       '@ampproject/toolbox-optimizer': 1.1.1
@@ -6775,6 +6784,7 @@ specifiers:
   isomorphic-unfetch: ^3.0.0
   next: 9.1.7
   next-absolute-url: ^1.2.0
+  next-seo: ^4.1.0
   react: 16.12.0
   react-dom: 16.12.0
   react-image: ^2.2.2
