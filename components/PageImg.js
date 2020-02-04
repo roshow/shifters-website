@@ -1,14 +1,25 @@
 import Img from 'react-image';
+import styled from 'styled-components';
 
-const PageImg = ({src, alt = '', className, style, ...props}) => (
+const ImgWrapper = styled.div`
+  img {
+    width: 100%;
+  }
+`;
+
+const StyledLoader = styled.div`
+  width: 100%;
+  text-align: center;
+`;
+
+const PageImg = ({src, alt = '', className, ...props}) => (
   <Img
     {...props}
     src={`https://drive.google.com/uc?id=${src}`}
     alt={alt}
-    loader={<h4>Loading...</h4>}
+    loader={<StyledLoader><h4>Loading...</h4></StyledLoader>}
     unloader={<div/>}
-    container={children => <div className={className} style={style}>{children}</div>}
-    
+    container={children => <ImgWrapper className={className}>{children}</ImgWrapper>}
   />
 );
 
