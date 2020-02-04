@@ -1,6 +1,6 @@
 // import App from 'next/app'
 import { useState } from 'react';
-import Head from 'next/Head';
+import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
 
 function MyApp({ Component, pageProps }) {
