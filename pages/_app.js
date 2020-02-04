@@ -1,5 +1,6 @@
 // import App from 'next/app'
 import { useState } from 'react';
+import { DefaultSeo } from 'next-seo';
 
 function MyApp({ Component, pageProps }) {
   
@@ -12,7 +13,26 @@ function MyApp({ Component, pageProps }) {
     setChapters,
   }
   
-  return <Component {...allProps} />;
+  const seoDescription = 'A story about cats by Chobberchobber.';
+  const seoImgUrl = 'https://drive.google.com/uc?id=1mH8s2oQtuoeeZ90-j7U-hfiB8wZ_Qsxs';
+  
+  const defaultSeoProps = {
+    title: 'Shifters',
+    description: seoDescription,
+    openGraph: {
+      title: 'Shifters',
+      description: seoDescription,
+      images: [{ url: seoImgUrl }],
+      site_name: 'Shifters by Chobberchobber',
+    }
+  };
+  
+  return (
+    <>
+      <DefaultSeo {...defaultSeoProps} />
+      <Component {...allProps} />
+    </>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for

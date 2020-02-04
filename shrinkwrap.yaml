@@ -3,10 +3,11 @@ dependencies:
   isomorphic-unfetch: 3.0.0
   next: 9.1.7
   next-absolute-url: 1.2.0
+  next-seo: 4.1.0
   react: 16.12.0
   react-dom: 16.12.0
   react-image: 2.2.2
-  styled-components: 5.0.0
+  styled-components: 5.0.1
 devDependencies:
   babel-eslint: 10.0.3
   eslint: 6.8.0
@@ -4302,6 +4303,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-iXgyo19lUUyO+380y8m1W/ESnW1IjfJ8jPx/WBnyu2bandgoKatOCmdDkIVw/Qb7ZLFx/a8ksUo8qT/x66axKA==
+  /next-seo/4.1.0:
+    dev: false
+    peerDependencies:
+      prop-types: ^15.6.0
+      react: ^16.0.0
+      react-dom: ^16.0.0
+    resolution:
+      integrity: sha512-wHFrn20xc1jPaCaAviD11F1lNdmbp07kysFiLXZTArIqk8YSWOXCEkmh3kgVuXBkHeZOhIUdbuEc9xtf0LgCLg==
   /next/9.1.7:
     dependencies:
       '@ampproject/toolbox-optimizer': 1.1.1
@@ -6172,7 +6181,7 @@ packages:
       webpack: ^4.0.0
     resolution:
       integrity: sha512-B0dOCFwv7/eY31a5PCieNwMgMhVGFe9w+rh7s/Bx8kfFkrth9zfTZquoYvdw8URgiqxObQKcpW51Ugz1HjfdZw==
-  /styled-components/5.0.0:
+  /styled-components/5.0.1:
     dependencies:
       '@babel/helper-module-imports': 7.8.3
       '@babel/traverse': 7.8.4
@@ -6190,7 +6199,7 @@ packages:
       react-dom: '>= 16.8.0'
       react-is: '>= 16.8.0'
     resolution:
-      integrity: sha512-F7VhIXIbUXJ8KO3pU9wap2Hxdtqa6PZ1uHrx+YXTgRjyxGlwvBHb8LULXPabmDA+uEliTXRJM5WcZntJnKNn3g==
+      integrity: sha512-E0xKTRIjTs4DyvC1MHu/EcCXIj6+ENCP8hP01koyoADF++WdBUOrSGwU1scJRw7/YaYOhDvvoad6VlMG+0j53A==
   /styled-jsx/3.2.4:
     dependencies:
       babel-plugin-syntax-jsx: 6.18.0
@@ -6775,7 +6784,8 @@ specifiers:
   isomorphic-unfetch: ^3.0.0
   next: 9.1.7
   next-absolute-url: ^1.2.0
+  next-seo: ^4.1.0
   react: 16.12.0
   react-dom: 16.12.0
   react-image: ^2.2.2
-  styled-components: ^5.0.0
+  styled-components: ^5.0.1
