@@ -2,21 +2,8 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
-import styled from 'styled-components';
+import { AppContainer } from './../components/StyledApp';
 import CSSReset from './../components/CSSReset';
-
-const AppContainer = styled.div`
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-`;
-
-export const AppPageContainer = styled.div`
-  width: 100%;
-  max-width: 600px;
-`;
 
 function MyApp({ Component, pageProps }) {
   
@@ -53,7 +40,9 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <DefaultSeo {...defaultSeoProps} />
       <CSSReset />
-      <Component {...allProps} />
+      <AppContainer>
+        <Component {...allProps} />
+      </AppContainer>
     </>
   );
 }

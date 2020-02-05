@@ -1,44 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { AppPageContainer } from './StyledApp';
 import PageImg from './PageImg';
 
-const ViewContainer = styled.div`
-  display: flex;
-  flex: 1;
+
+const StyledTitle = styled.h2`
   width: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  .page-window {
-    max-width: 600px;
-    overflow: hidden;
-    > div {
-      display: flex;
-      flex-direction: row;
-      width: 300%;
-      max-width: 1800px;
-      transform: translateX(-33.333%);
-      &.prev-page {
-        transition: transform 0.7s;
-        transform: translateX(0%);
-      }
-      &.next-page {
-        transition: transform 0.7s;
-        transform: translateX(-66.666%);
-      }
-      > div {
-        flex: 1;
-      }
-    }
-  }
+  text-align: center;
+  margin: 10px 0;
 `;
 
-const PageNav = styled.div`
+const StyledPageNav = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  max-width: 600px;
   button, h3 {
     margin: 0;
     text-transform: uppercase;
@@ -46,6 +22,49 @@ const PageNav = styled.div`
   div, button, h3 {
     flex: 1;
     text-align: center;
+  }
+`;
+
+const StyledPageDisplay = styled.div`
+  width: 100%;
+  overflow: hidden;
+  > div {
+    display: flex;
+    flex-direction: row;
+    width: 300%;
+
+    transform: translateX(-33.333%);
+    .page-current {
+      opacity: 1;
+    }
+    .page-prev, .page-next {
+      opacity: 0;
+    }
+
+    &.animate {
+      transition: transform 0.7s;
+      .page-img {
+        transition: opacity 0.7s;
+      }
+      .page-current {
+        opacity: 0;
+      }
+      &.anim-prev {
+        transform: translateX(0%);
+        .page-prev {
+          opacity: 1;
+        }
+      }
+      &.anim-next {
+        transform: translateX(-66.666%);
+        .page-next {
+          opacity: 1;
+        }
+      }
+    }
+    > div {
+      flex: 1;
+    }
   }
 `;
 
@@ -65,7 +84,7 @@ const PageView = ({ chapterData, pageIndex, prevPage = {}, nextPage = {} }) => {
 
   useEffect(() => {
     const onAnimationEnd = () => {
-      const { readUrl } = pageToAnimate === 'prev-page' ? prevPage : nextPage;
+      const { readUrl } = pageToAnimate === 'anim-prev' ? prevPage : nextPage;
       router.push('/read/[chapter]/[page]', readUrl);
     }
     if (animElRef.current) {
@@ -87,27 +106,27 @@ const PageView = ({ chapterData, pageIndex, prevPage = {}, nextPage = {} }) => {
     }
   }, [imgSrcChangedThisRender]);
 
-  const animClass = !imgSrcChangedThisRender ? pageToAnimate : '';
+  const animClass = !imgSrcChangedThisRender && pageToAnimate.length ? 'animate ' + pageToAnimate : '';
   
   return (
-    <ViewContainer>
-      <h2>Chapter {number}: {title}</h2>
+    <AppPageContainer>
+      <StyledTitle>Chapter {number}: {title}</StyledTitle>
       
-      <PageNav>
-        {prevPage.readUrl && <button onClick={() => setPageToAnimate('prev-page')}>prev</button> || <div />}     
+      <StyledPageNav>
+        {prevPage.readUrl && <button onClick={() => setPageToAnimate('anim-prev')}>prev</button> || <div />}     
         <h3>{ pageIndex > 0 ? `page ${pageIndex}` : 'cover' }</h3>
-        {nextPage.readUrl && <button onClick={() => setPageToAnimate('next-page')}>next</button> || <div />}
-      </PageNav>
+        {nextPage.readUrl && <button onClick={() => setPageToAnimate('anim-next')}>next</button> || <div />}
+      </StyledPageNav>
       
-      <div className="page-window">
+      <StyledPageDisplay>
         <div ref={animElRef} className={animClass}>
-          <PageImg key={prevPage.src} src={prevPage.src} />
-          <PageImg key={imgSrc} src={imgSrc} />
-          <PageImg key={nextPage.src} src={nextPage.src} />
+          <PageImg key={prevPage.src} src={prevPage.src} className="page-img page-prev" />
+          <PageImg key={imgSrc} src={imgSrc} className="page-img page-current"/>
+          <PageImg key={nextPage.src} src={nextPage.src}  className="page-img page-next" />
         </div>
-      </div>
+      </StyledPageDisplay>
       
-    </ViewContainer>
+    </AppPageContainer>
   );
 }
 
