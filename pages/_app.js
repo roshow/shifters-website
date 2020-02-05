@@ -3,15 +3,20 @@ import { useState } from 'react';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
 import styled from 'styled-components';
+import CSSReset from './../components/CSSReset';
 
-const FlexWrapper = styled.div`
+const AppContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-flow: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
 `;
 
+export const AppPageContainer = styled.div`
+  width: 100%;
+  max-width: 600px;
+`;
 
 function MyApp({ Component, pageProps }) {
   
@@ -47,9 +52,8 @@ function MyApp({ Component, pageProps }) {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <DefaultSeo {...defaultSeoProps} />
-      <FlexWrapper>
-        <Component {...allProps} />
-      </FlexWrapper>
+      <CSSReset />
+      <Component {...allProps} />
     </>
   );
 }
