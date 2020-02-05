@@ -5,13 +5,13 @@ import PageImg from './PageImg';
 
 const ViewContainer = styled.div`
   display: flex;
-  flex: 1;
   width: 100%;
+  max-width: 600px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   .page-window {
-    max-width: 600px;
+    width: 100%;
     overflow: hidden;
     > div {
       display: flex;
@@ -38,7 +38,6 @@ const PageNav = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  max-width: 600px;
   button, h3 {
     margin: 0;
     text-transform: uppercase;
