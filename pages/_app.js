@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
+import { AppContainer } from './../components/StyledApp';
+import CSSReset from './../components/CSSReset';
 
 function MyApp({ Component, pageProps }) {
   
@@ -37,7 +39,10 @@ function MyApp({ Component, pageProps }) {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <DefaultSeo {...defaultSeoProps} />
-      <Component {...allProps} />
+      <CSSReset />
+      <AppContainer>
+        <Component {...allProps} />
+      </AppContainer>
     </>
   );
 }

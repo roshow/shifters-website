@@ -11,6 +11,9 @@ export const ChapterDisplay = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  h2 {
+    margin: 10px;
+  }
 `
 
 const ChapterView = ({number, title, pages}) => (
