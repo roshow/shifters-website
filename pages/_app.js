@@ -2,6 +2,16 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
+import styled from 'styled-components';
+
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
 
 function MyApp({ Component, pageProps }) {
   
@@ -37,7 +47,9 @@ function MyApp({ Component, pageProps }) {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <DefaultSeo {...defaultSeoProps} />
-      <Component {...allProps} />
+      <FlexWrapper>
+        <Component {...allProps} />
+      </FlexWrapper>
     </>
   );
 }
