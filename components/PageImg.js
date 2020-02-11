@@ -1,5 +1,5 @@
-import Img from 'react-image';
 import styled from 'styled-components';
+import useImgDecode from './../hooks/useImgDecode';
 
 const ImgWrapper = styled.div`
   img {
@@ -12,15 +12,17 @@ const StyledLoader = styled.div`
   text-align: center;
 `;
 
-const PageImg = ({src, alt = '', className, ...props}) => (
-  <Img
-    {...props}
-    src={`https://drive.google.com/uc?id=${src}`}
-    alt={alt}
-    loader={<StyledLoader><h4>Loading...</h4></StyledLoader>}
-    unloader={<div/>}
-    container={children => <ImgWrapper className={className}>{children}</ImgWrapper>}
-  />
-);
+const PageImg = ({src, alt = '', className, style, ...props}) => {
+  const fullSrcUrl = `https://drive.google.com/uc?id=${src}`;
+
+  const [ isImgLoading, imgError ] = useImgDecode(fullSrcUrl);
+  
+  return (
+    <ImgWrapper className={className} style={style}>
+      {!isImgLoading && !imgError && <img src={fullSrcUrl} alt={alt} {...props} />}
+      {isImgLoading && <StyledLoader><h4>Loading...</h4></StyledLoader>}
+    </ImgWrapper>
+  );
+};
 
 export default PageImg;
