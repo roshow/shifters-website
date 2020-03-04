@@ -24,7 +24,7 @@ const useImgDecode = (src) => {
         setLoadingState({ isLoading: false, error: null });
       })
       .catch(e => setLoadingState({ isLoading: false, error: e }));
-  
+    
     return () => {
       imgRef.current = null;
     };
