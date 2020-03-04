@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const questionableCache = [];
 
 const useImgDecode = (src) => {
+  const imgRef = useRef();
+  
   const [{ isLoading, error }, setLoadingState] = useState({
     isLoading: !questionableCache.includes(src),
     error: null,
@@ -13,18 +15,22 @@ const useImgDecode = (src) => {
       setLoadingState({ isLoading: false, error: null });
       return;
     }
-    if (isLoading === false) {
-      setLoadingState({ isLoading: true, error: null });
-    }
-    const image = new Image();
-    image.src = src;
-    image.decode()
+    setLoadingState({ isLoading: true, error: null });
+    imgRef.current = new Image();
+    imgRef.current.src = src;
+    imgRef.current.decode()
       .then(() => {
         questionableCache.push(src);
         setLoadingState({ isLoading: false, error: null });
       })
       .catch(e => setLoadingState({ isLoading: false, error: e }));
-  }, [src]);
+    
+    return () => {
+      imgRef.current = null;
+    };
+    
+  }, [src, setLoadingState, imgRef]);
+  
   return [isLoading, error];
 };
 
