@@ -9,7 +9,7 @@ export default (req) => {
     clientId: process.env.AUTH_CLIENT_ID,
     clientSecret: process.env.AUTH_CLIENT_SECRET,
     scope: 'openid profile',
-    redirectUri: `${origin}callback`,
+    redirectUri: `${origin}/api/callback`,
     postLogoutRedirectUri: origin,
     session: {
       // The secret used to encrypt the cookie.
