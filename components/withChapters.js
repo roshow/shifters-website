@@ -35,7 +35,7 @@ const withChapters = (PageComponent) => {
     }
     
     let chapters = [];
-    if (ctx.req) {
+    if (typeof window === 'undefined') {
       chapters = await fetchChapters(ctx.req);
     }
     

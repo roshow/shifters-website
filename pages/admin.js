@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import auth0 from '../utils/auth0';
 
 const StyledAdmin = styled.div`
   font-family: Arial, Helvetica, sans-serif;
@@ -50,6 +51,22 @@ const AdminPage = ({ setChapters }) => {
       <h4><Link href="/allpages"><a>Go See All Pages</a></Link></h4>
     </StyledAdmin>
   );
+};
+
+AdminPage.getInitialProps = async (ctx) => {
+  if (typeof window === 'undefined') {
+    const session = await auth0(ctx.req).getSession(ctx.req);
+    console.log(session);
+    const user = session?.user;
+    if (!user) {
+      ctx.res.writeHead(302, {
+        Location: '/api/login'
+      });
+      ctx.res.end();
+      return;
+    }
+    return { user };
+  }
 };
 
 export default AdminPage;
