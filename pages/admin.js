@@ -55,8 +55,7 @@ const AdminPage = ({ setChapters }) => {
 
 AdminPage.getInitialProps = async (ctx) => {
   if (typeof window === 'undefined') {
-    const session = await auth0(ctx.req).getSession(ctx.req);
-    console.log(session);
+    const session = await auth0.getSession(ctx.req);
     const user = session?.user;
     if (!user) {
       ctx.res.writeHead(302, {
@@ -67,6 +66,7 @@ AdminPage.getInitialProps = async (ctx) => {
     }
     return { user };
   }
+  return {};
 };
 
 export default AdminPage;
