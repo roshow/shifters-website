@@ -1,5 +1,6 @@
 import { google } from 'googleapis';
 import fetch from 'isomorphic-unfetch';
+import auth0 from '../../utils/auth0';
 
 const listFiles = (drive, config) => new Promise((resolve, reject) => {
   drive.files.list(config, (err, res) => {
@@ -92,7 +93,7 @@ async function indexChapters() {
 
 }
 
-export default async (req, res) =>{
+export default auth0.requireAuthentication(async (req, res) =>{
   
   if (req.method !== 'POST') {
     return res.status(405).send('Method not supported');
@@ -105,4 +106,4 @@ export default async (req, res) =>{
     res.status(500).send('Something did not go right on our end I think');
   }
   
-};
+});

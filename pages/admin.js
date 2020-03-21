@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import Router from "next/router";
 import Link from 'next/link';
+import axios from 'axios';
 import styled from 'styled-components';
+import auth0 from '../utils/auth0';
 
 const StyledAdmin = styled.div`
   font-family: Arial, Helvetica, sans-serif;
@@ -23,16 +26,13 @@ const AdminPage = ({ setChapters }) => {
   const publishChapters = async () => {
     setIsPublishing(true);
     setDidPublish(false);
-    const res = await fetch('/api/create-index', {
-      method: 'POST',
-    });
-    setDidPublish(true);
-    if (res.status !== 200) {
+    try {
+      const { data } = await axios.post('/api/create-index');
+      setChapters(data);
+    } catch (e) {
       setIsErrorPublishing(true);
-    } else {
-      const newChapters = await res.json();
-      setChapters(newChapters);
     }
+    setDidPublish(true);
     setIsPublishing(false);
   };
 
@@ -50,6 +50,32 @@ const AdminPage = ({ setChapters }) => {
       <h4><Link href="/allpages"><a>Go See All Pages</a></Link></h4>
     </StyledAdmin>
   );
+};
+
+AdminPage.getInitialProps = async (ctx) => {
+  if (typeof window === 'undefined') {
+    const session = await auth0.getSession(ctx.req);
+    const user = session?.user;
+    if (!user) {
+      ctx.res.writeHead(302, {
+        Location: '/api/login'
+      });
+      ctx.res.end();
+      return;
+    }
+    return { user };
+  }
+
+  try {
+    const { data } = await axios('/api/me');
+    return { user: data };
+  } catch (e) {
+    console.log('client side booting you');
+    Router.push('/api/login');
+    return {};
+  }
+
+  
 };
 
 export default AdminPage;

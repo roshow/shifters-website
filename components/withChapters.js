@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
-import fetch from 'isomorphic-unfetch';
+import axios from 'axios';
 import absoluteUrl from 'next-absolute-url';
 
 const API_ENDPOINT = '/api/chapters';
 
 const fetchChapters = async (req) => {
   const { origin } = absoluteUrl(req, 'localhost:3000');
-  const res = await fetch(`${origin}${API_ENDPOINT}`);
-  const chapters = await res.json();
-  return chapters;
+  const { data } = await axios(`${origin}${API_ENDPOINT}`);
+  return data;
 }
 
 const withChapters = (PageComponent) => {
@@ -35,7 +34,7 @@ const withChapters = (PageComponent) => {
     }
     
     let chapters = [];
-    if (ctx.req) {
+    if (typeof window === 'undefined') {
       chapters = await fetchChapters(ctx.req);
     }
     

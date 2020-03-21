@@ -2,6 +2,18 @@
   "env": {
     "INDEX_JSON_FILE_ID": "@shifters-index-id",
     "CHAPTERS_FOLDER_ID": "@shifters-chapters-folder",
-    "GOOGLE_SERVICE_ACCOUNT": "@shifters-google-account"
+    "GOOGLE_SERVICE_ACCOUNT": "@shifters-google-account",
+    "AUTH_DOMAIN": "@shifters-auth-domain",
+    "AUTH_CLIENT_ID": "@shifters-client-id",
+    "AUTH_CLIENT_SECRET": "@shifters-client-secret",
+    "COOKIE_SECRET": "@shifters-cookie-secret"
+  },
+  "build": {
+    "env": {
+      "AUTH_DOMAIN": "@shifters-auth-domain",
+      "AUTH_CLIENT_ID": "@shifters-client-id",
+      "AUTH_CLIENT_SECRET": "@shifters-client-secret",
+      "COOKIE_SECRET": "@shifters-cookie-secret"
+    }
   }
 }
