@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import Router from "next/router";
 import Link from 'next/link';
+import axios from 'axios';
 import styled from 'styled-components';
 import auth0 from '../utils/auth0';
 
@@ -24,16 +26,13 @@ const AdminPage = ({ setChapters }) => {
   const publishChapters = async () => {
     setIsPublishing(true);
     setDidPublish(false);
-    const res = await fetch('/api/create-index', {
-      method: 'POST',
-    });
-    setDidPublish(true);
-    if (res.status !== 200) {
+    try {
+      const { data } = await axios.post('/api/create-index');
+      setChapters(data);
+    } catch (e) {
       setIsErrorPublishing(true);
-    } else {
-      const newChapters = await res.json();
-      setChapters(newChapters);
     }
+    setDidPublish(true);
     setIsPublishing(false);
   };
 
@@ -66,7 +65,17 @@ AdminPage.getInitialProps = async (ctx) => {
     }
     return { user };
   }
-  return {};
+
+  try {
+    const { data } = await axios('/api/me');
+    return { user: data };
+  } catch (e) {
+    console.log('client side booting you');
+    Router.push('/api/login');
+    return {};
+  }
+
+  
 };
 
 export default AdminPage;
