@@ -1,5 +1,5 @@
 import { google } from 'googleapis';
-import fetch from 'isomorphic-unfetch';
+import axios from 'axios';
 import auth0 from '../../utils/auth0';
 
 const listFiles = (drive, config) => new Promise((resolve, reject) => {
@@ -55,11 +55,9 @@ async function indexChapters() {
   
     const { id: titleFileId } = files.find(({ name }) => name === 'title.txt');
 
-    const titleFile = await fetch(`https://drive.google.com/uc?id=${titleFileId}&export=download`);
+    const { data } = await axios(`https://drive.google.com/uc?id=${titleFileId}&export=download`);
   
-    const titleRaw = await titleFile.text();
-  
-    const title = titleRaw.trim();
+    const title = data.trim();
     
     return {
       number: parseInt(folder.name),
