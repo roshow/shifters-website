@@ -53,11 +53,14 @@ async function indexChapters() {
       .sort((a, b) => getIndexFromName(a.name) - getIndexFromName(b.name))
       .map(({ id }) => id)
   
-    const { id: titleFileId } = files.find(({ name }) => name === 'title.txt');
+    const titleFileId = files.find(({ name }) => name === 'title.txt')?.id;
 
-    const { data } = await axios(`https://drive.google.com/uc?id=${titleFileId}&export=download`);
-  
-    const title = data.trim();
+    let title = '';
+
+    if (titleFileId) {
+      const { data } = await axios(`https://drive.google.com/uc?id=${titleFileId}&export=download`);
+      title = data.trim();
+    }
     
     return {
       number: parseInt(folder.name),
