@@ -8,7 +8,7 @@
     "start": "next build && next start"
   },
   "dependencies": {
-    "@auth0/nextjs-auth0": "^0.10.0",
+    "@auth0/nextjs-auth0": "^1.6.2",
     "axios": "^0.19.2",
     "googleapis": "^47.0.0",
     "next": "9.1.7",
